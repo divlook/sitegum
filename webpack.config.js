@@ -2,7 +2,7 @@ const webpack = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HandlebarsPlugin = require('handlebars-webpack-plugin')
 const { mode } = require('./webpack/env')
-const { dir, loadConfig, workspace } = require('./webpack/utils')
+const { dir, loadConfig, workspace, route } = require('./webpack/utils')
 
 const sitegumConfig = loadConfig()
 
@@ -12,7 +12,7 @@ const baseConfig = webpack.config.getNormalizedWebpackOptions({
     output: {
         filename: '[name][contenthash].js',
         path: workspace('dist'),
-        publicPath: sitegumConfig.publicPath,
+        publicPath: route('/'),
     },
     plugins: [
         new CleanWebpackPlugin(),
@@ -39,7 +39,8 @@ module.exports = () => {
             contentBase: workspace('dist'),
             port: 3000,
             hot: true,
-            publicPath: sitegumConfig.publicPath,
+            publicPath: route('/'),
+            openPage: route('/').replace(/^\//, ''),
         }
     }
 
