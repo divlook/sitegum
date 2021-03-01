@@ -63,8 +63,6 @@ const route = (to = '/') => {
         segments.push(postfix)
     }
 
-    console.log(segments)
-
     return segments.join('/') || '/'
 }
 
