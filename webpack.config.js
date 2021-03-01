@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HandlebarsPlugin = require('handlebars-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 const { mode } = require('./webpack/env')
 const { dir, loadConfig, workspace, route } = require('./webpack/utils')
 
@@ -19,14 +20,15 @@ const baseConfig = webpack.config.getNormalizedWebpackOptions({
         new HandlebarsPlugin({
             entry: workspace('src/pages/**/*.hbs'),
             output: workspace('dist/[path]/[name].html'),
-            partials: [
-                workspace('src/components/**/*.hbs'),
-            ],
+            partials: [workspace('src/components/**/*.hbs')],
             helpers: {
                 nameOfHbsHelper: Function.prototype,
-                projectHelpers: dir("helpers/**/*.helper.js")
+                projectHelpers: dir('helpers/**/*.helper.js'),
             },
             data: sitegumConfig,
+        }),
+        new CopyPlugin({
+            patterns: [workspace('public')],
         }),
     ],
     stats: 'minimal',

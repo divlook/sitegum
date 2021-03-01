@@ -105,9 +105,19 @@ workspace/
 ┃ ┗ workflows/
 ┃   ┗ gh-pages.yml
 ┃
+┣ dist/ ------------------------ 빌드 결과물이 생성되는 폴더입니다.
+┃ ┗ ...
+┃
 ┣ helpers/ --------------------- 이 곳에 helper를 추가할 수 있습니다. (https://handlebarsjs.com/guide/expressions.html#helpers)
 ┃ ┗ route.helper.js ------------ publicPath와 입력한 경로를 합쳐주는 헬퍼입니다.
 ┃                                - 예제 (publicPath="/v2") : {{route '/home'}} -> "/v2/home"
+┃
+┣ node_modules/ ---------------- 패키지가 설치되는 폴더입니다.
+┃ ┗ ...
+┃
+┣ public/ ---------------------- 정적 리소스 폴더입니다.
+┃ ┗ ...                          - 참고 : src/pages/example/index.hbs
+┃
 ┣ src/
 ┃ ┣ components/ ---------------- 컴포넌트 폴더입니다. (https://handlebarsjs.com/guide/partials.html#basic-partials)
 ┃ ┃ ┗ [폴더명]/[이름].hbs           - 예제 1 : {{> [폴더명]/[이름]}}
