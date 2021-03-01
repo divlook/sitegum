@@ -1,0 +1,15 @@
+{{#> layouts/default}}
+
+{{#*inline 'head'}}
+    {{> inc/head title=title}}
+{{/inline}}
+
+{{#*inline 'body'}}
+    <h1>Hello World</h1>
+
+    <p>
+        <a href="{{route '/about'}}">Go to about</a>
+    </p>
+{{/inline}}
+
+{{/layouts/default}}
