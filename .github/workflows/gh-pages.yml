@@ -13,13 +13,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Github Repository Metadata
+        uses: varunsridharan/action-repository-meta@2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Install
+        if: success()
         run: |
           [ -f ./yarn.lock ] && yarn || npm i
 
       - name: Build
         if: success()
-        run: npm run build
+        run: |
+          if [ $REPOSITORY_OWNER -eq $REPOSITORY_SLUG ]
+          then
+            npm run build
+          else
+            npm run build --public-path=$REPOSITORY_SLUG
+          fi
+        env:
+          REPOSITORY_OWNER: ${{ github.repository_owner }}
+          REPOSITORY_SLUG: ${{ env.REPOSITORY_SLUG }}
 
       - name: Add No Jekyll
         if: success()

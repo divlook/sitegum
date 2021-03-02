@@ -162,6 +162,8 @@ workspace/
 
 ## 배포
 
+### Github Pages
+
 Github를 사용하실 경우 `push`할 때마다 사이트가 자동으로 배포됩니다.
 
 자동으로 배포되는게 싫은 경우 `.github/workflows/gh-pages.yml` 이 파일을 삭제하시면 됩니다.
