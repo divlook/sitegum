@@ -58,24 +58,77 @@ npm install -g yarn
 yarn -v
 ```
 
+### VS Code (선택사항)
+
+https://code.visualstudio.com
+
+VS Code 외에 이미 사용하시는 에디터가 있다면 해당 에디터를 사용하셔도 상관없습니다.
+
 ## 사용 방법
 
-### 소스 다운로드
+### 프로젝트 폴더 생성 및 이동
 
-1. 소스를 [다운로드](https://github.com/divlook/sitegum/archive/main.zip) 받은 뒤 적당한 위치에 압축 해제
+```bash
+mkdir <프로젝트 이름>
+cd <프로젝트 이름>
 
-2. [VS Code](https://code.visualstudio.com/) 또는 다른 에디터를 사용하여 프로젝트 폴더를 열고 터미널 실행
+# 예제
+mkdir ./my-site
+cd my-site
+```
+
+### 프로젝트 초기화
+
+```bash
+yarn init -y
+
+# npm을 사용할 경우
+npm init -y
+```
 
 ### 패키지 설치
 
+아직 정식으로 배포된 패키지가 아닙니다.
+
+이 방법은 github에서 바로 설치하는 방법이며, 정식 패키지가 배포되어도 사용할 수는 있습니다.
+
 ```bash
-yarn install
+yarn add divlook/sitegum
 
 # npm을 사용할 경우
-npm install
+npm install divlook/sitegum
 ```
 
-### 개발 서버 실행
+### 명령어 추가
+
+`package.json` 파일의 `scripts` 안에 아래 내용을 추가해주세요.
+
+```jsonc
+{
+    "scripts": {
+        "sitegum": "sitegum",
+        "dev": "sitegum dev --open",
+        "build": "sitegum build"
+    },
+}
+```
+
+### 초기 파일 생성
+
+초기에 필요한 파일들을 자동으로 생성할 수 있습니다.
+
+```bash
+yarn run sitegum init
+
+# npm을 사용할 경우
+npm run sitegum init
+```
+
+### Dev Server
+
+파일이 수정될 때마다 자동으로 업데이트되는 서버를 실행합니다.
+
+개발 환경에 적합하며 상용 서비스에서 사용하면 안됩니다.
 
 - http://localhost:3000
 
@@ -86,7 +139,7 @@ yarn run dev
 npm run dev
 ```
 
-### HTML 생성
+### Build
 
 빌드 명령어를 실행하면 `dist` 폴더에 html파일들이 생성됩니다.
 
@@ -95,6 +148,14 @@ yarn run build
 
 # npm을 사용할 경우
 npm run build
+```
+
+### Help
+
+자세한 사용방법을 볼 수 있습니다.
+
+```bash
+yarn run sitegum --help
 ```
 
 ## 프로젝트 구조
