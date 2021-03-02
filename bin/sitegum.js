@@ -16,8 +16,8 @@ const { dir, workspace } = require('../webpack/utils')
  * @param {*} opt
  */
 const execWebpack = (cmd, opt) => {
-    const crossEnv = './node_modules/.bin/cross-env'
-    const webpack = './node_modules/.bin/webpack'
+    const crossEnv = dir('node_modules/.bin/cross-env')
+    const webpack = dir('node_modules/.bin/webpack')
     const modeByCmd = {
         dev: 'development',
         build: 'production',
@@ -49,8 +49,10 @@ const execWebpack = (cmd, opt) => {
         }
     }
 
+    args.push(`--config=${dir('webpack.config.js')}`)
+
     const stream = spawn(args.join(' '), {
-        cwd: path.resolve(__dirname, '../'),
+        cwd: process.cwd(),
         shell: true,
     })
 
@@ -106,6 +108,7 @@ program
             ]
             const dest = []
             const resultQue = []
+            const packageRootPath = path.join(__dirname, '../')
 
             target.forEach((filename) => {
                 if (!fs.existsSync(filename)) {
@@ -130,7 +133,7 @@ program
             })
 
             target.forEach((filename) => {
-                dest.push(path.relative(process.cwd(), filename))
+                dest.push(path.relative(packageRootPath , filename))
             })
 
             dest.forEach((filename, index) => {
