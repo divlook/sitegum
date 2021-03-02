@@ -105,14 +105,10 @@ workspace/
 ┃ ┗ workflows/
 ┃   ┗ gh-pages.yml
 ┃
-┣ dist/ ------------------------ 빌드 결과물이 생성되는 폴더입니다.
+┣ dist/ ------------------------ 빌드 결과물이 생성되는 폴더입니다. (수정 금지)
 ┃ ┗ ...
 ┃
-┣ helpers/ --------------------- 이 곳에 helper를 추가할 수 있습니다. (https://handlebarsjs.com/guide/expressions.html#helpers)
-┃ ┗ route.helper.js ------------ publicPath와 입력한 경로를 합쳐주는 헬퍼입니다.
-┃                                - 예제 (publicPath="/v2") : {{route '/home'}} -> "/v2/home"
-┃
-┣ node_modules/ ---------------- 패키지가 설치되는 폴더입니다.
+┣ node_modules/ ---------------- 패키지가 설치되는 폴더입니다. (수정 금지)
 ┃ ┗ ...
 ┃
 ┣ public/ ---------------------- 정적 리소스 폴더입니다.
@@ -128,15 +124,10 @@ workspace/
 ┃   ┣ about/                     - 참고 : https://handlebarsjs.com/guide/partials.html#inline-partials
 ┃   ┃ ┗ index.hbs
 ┃   ┗ index.hbs
-┣ webpack/
-┃ ┣ env.js
-┃ ┗ utils.js
+┃
 ┣ .gitignore
-┣ README.md
 ┣ package.json
-┣ sitegum.config.json ---------- 사이트 설정 파일입니다.
-┣ webpack.config.js
-┗ yarn.lock
+┗ sitegum.config.json ---------- 사이트 설정 파일입니다.
 ```
 
 ## 설정
@@ -153,11 +144,29 @@ workspace/
 
 - sitegum.config.json
 
-```json
+```jsonc
 {
     "title": "Sitegum",
     // 데이터 추가해서 사용 가능
 }
+```
+
+## Helper
+
+- Handlebars Helper 설명 : https://handlebarsjs.com/guide/expressions.html#helpers
+
+### route
+
+publicPath와 입력한 경로를 합쳐주는 헬퍼입니다.
+
+아래는 `publicPath="/v2"` 일때의 예제입니다.
+
+```hbs
+<!-- input -->
+<a href="{{route '/home'}}">Go to home</a>
+
+<!-- output -->
+<a href="/v2/home">Go to home</a>
 ```
 
 ## 배포
