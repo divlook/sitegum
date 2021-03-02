@@ -3,10 +3,13 @@
 'use strict'
 
 const path = require('path')
+const fs = require('fs')
 const { spawn } = require('child_process')
 const { Command, Option } = require('commander')
+const { glob } = require('glob')
 const { version } = require('../package.json')
 const env = require('../webpack/env')
+const { dir, workspace } = require('../webpack/utils')
 
 /**
  * @param {'dev' | 'build'} cmd
@@ -90,6 +93,67 @@ program
     .addOption(options.publicPath)
     .action((opt) => {
         execWebpack('build', opt)
+    })
+
+program
+    .command('init')
+    .description('초기 파일 생성')
+    .action(async () => {
+        try {
+            const target = [
+                dir('.github/workflows/gh-pages.yml'),
+                dir('sitegum.config.json'),
+            ]
+            const dest = []
+            const resultQue = []
+
+            target.forEach((filename) => {
+                if (!fs.existsSync(filename)) {
+                    throw new Error(`해당 파일이 존재하지 않습니다. (${filename})`)
+                }
+            })
+
+            await new Promise((resolve, reject) => {
+                glob(dir('*(public|src)/**'), (error, matches) => {
+                    if (error) {
+                        reject(error)
+                        return
+                    }
+
+                    matches.forEach((filename) => {
+                        if (fs.statSync(filename).isFile()) {
+                            target.push(filename)
+                        }
+                    })
+                    resolve()
+                })
+            })
+
+            target.forEach((filename) => {
+                dest.push(path.relative(process.cwd(), filename))
+            })
+
+            dest.forEach((filename, index) => {
+                const userFile = workspace(filename)
+                const packageFile = target[index]
+                const dirName = path.parse(userFile).dir
+
+                if (fs.existsSync(userFile)) {
+                    let msg = `해당 파일이 이미 존재합니다. (${filename})\n\n`
+                    msg += `생성될 파일 목록\n${dest.map(v => `- ${v}`).join('\n')}\n`
+                    throw new Error(msg)
+                }
+
+                resultQue.push(() => {
+                    fs.mkdirSync(dirName, { recursive: true })
+                    fs.copyFileSync(packageFile, userFile)
+                })
+            })
+
+            resultQue.forEach((cb) => cb())
+        } catch (reason) {
+            console.error(reason)
+        }
     })
 
 program.parse()
