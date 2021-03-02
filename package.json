@@ -13,7 +13,7 @@
     "dev": "./bin/sitegum.js dev --open",
     "build": "./bin/sitegum.js build"
   },
-  "devDependencies": {
+  "dependencies": {
     "clean-webpack-plugin": "^3.0.0",
     "commander": "^7.1.0",
     "copy-webpack-plugin": "^7.0.0",
