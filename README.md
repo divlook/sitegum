@@ -141,21 +141,24 @@ workspace/
 
 ## 설정
 
-### 사이트 설정
+### 환경 변수
+
+| 이름 | 타입 | 기본값 | 설명 |
+| - | - | - | - |
+| NODE_ENV | 'development' \| 'production' | development | 사이트명 |
+| PUBLIC_PATH | string | '/' | 사이트 기본 경로 |
+| PORT | number | 3000 | port |
+
+### 사이트 데이터
 
 - sitegum.config.json
 
 ```json
 {
     "title": "Sitegum",
-    "publicPath": "/"
+    // 데이터 추가해서 사용 가능
 }
 ```
-
-| 이름 | 설명 |
-| - | - |
-| title | 사이트명 |
-| publicPath | 사이트 기본 경로 |
 
 ## 배포
 

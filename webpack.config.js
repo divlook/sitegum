@@ -2,7 +2,7 @@ const webpack = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HandlebarsPlugin = require('handlebars-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
-const { mode } = require('./webpack/env')
+const { mode, port } = require('./webpack/env')
 const { dir, loadConfig, workspace, route } = require('./webpack/utils')
 
 const sitegumConfig = loadConfig()
@@ -39,7 +39,7 @@ module.exports = () => {
         baseConfig.devtool = 'inline-source-map'
         baseConfig.devServer = {
             contentBase: workspace('dist'),
-            port: 3000,
+            port,
             hot: true,
             publicPath: route('/'),
             openPage: route('/').replace(/^\//, ''),

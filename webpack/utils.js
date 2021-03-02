@@ -1,9 +1,5 @@
 const path = require('path')
-
-/**
- * @type {typeof defaultConfig}
- */
-let sitegumConfig
+const { publicPath } = require('./env')
 
 /**
  * @param {string} pathname
@@ -17,7 +13,6 @@ const dir = (pathname) => path.resolve(__dirname, '../', pathname)
 
 const defaultConfig = {
     title: 'Sitegum',
-    publicPath: '/',
 }
 
 /**
@@ -40,13 +35,9 @@ const loadConfig = () => {
  * @param {string} to
  */
 const route = (to = '/') => {
-    if (!sitegumConfig) {
-        sitegumConfig = loadConfig()
-    }
-
     const segments = ['']
 
-    const prefix = sitegumConfig.publicPath
+    const prefix = publicPath
         .replace(/^\//, '')
         .replace(/\/$/, '')
 
