@@ -104,6 +104,7 @@ program
         try {
             const target = [
                 dir('.github/workflows/gh-pages.yml'),
+                dir('.gitignore'),
                 dir('sitegum.config.json'),
             ]
             const dest = []
