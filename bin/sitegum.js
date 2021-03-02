@@ -6,11 +6,25 @@ const { Command, Option } = require('commander')
 const { version } = require('../package.json')
 const env = require('../webpack/env')
 
-const execWebpack = (opt, serve = false) => {
+/**
+ * @param {'dev' | 'build'} cmd
+ * @param {*} opt
+ */
+const execWebpack = (cmd, opt) => {
     const crossEnv = './node_modules/.bin/cross-env'
     const webpack = './node_modules/.bin/webpack'
+    const modeByCmd = {
+        dev: 'development',
+        build: 'production',
+    }
 
-    const args = [crossEnv, `NODE_ENV=${opt.mode}`]
+    const args = [crossEnv]
+
+    if (opt.mode) {
+        args.push(`NODE_ENV=${opt.mode}`)
+    } else {
+        args.push(`NODE_ENV=${modeByCmd[cmd]}`)
+    }
 
     if (opt.port) {
         args.push(`PORT=${opt.port}`)
@@ -22,7 +36,7 @@ const execWebpack = (opt, serve = false) => {
 
     args.push(webpack)
 
-    if (serve) {
+    if (cmd === 'dev') {
         args.push('serve')
 
         if (opt.open === true) {
@@ -64,7 +78,7 @@ program
     .option('-p, --port <port>', 'port', env.port)
     .addOption(options.publicPath)
     .action((opt) => {
-        execWebpack(opt, true)
+        execWebpack('dev', opt)
     })
 
 program
@@ -73,7 +87,7 @@ program
     .addOption(options.mode)
     .addOption(options.publicPath)
     .action((opt) => {
-        execWebpack(opt)
+        execWebpack('build', opt)
     })
 
 program.parse()

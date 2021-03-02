@@ -10,8 +10,8 @@
   "license": "MIT",
   "bin": "./bin/sitegum.js",
   "scripts": {
-    "dev": "node ./bin/sitegum.js dev --mode=development --open",
-    "build": "node ./bin/sitegum.js build --mode=production"
+    "dev": "node ./bin/sitegum.js dev --open",
+    "build": "node ./bin/sitegum.js build"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^3.0.0",
