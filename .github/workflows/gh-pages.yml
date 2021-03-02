@@ -26,11 +26,11 @@ jobs:
       - name: Build
         if: success()
         run: |
-          if [ $REPOSITORY_OWNER -eq $REPOSITORY_SLUG ]
+          if [ "$REPOSITORY_OWNER" = "$REPOSITORY_SLUG" ]
           then
             npm run build
           else
-            npm run build --public-path=$REPOSITORY_SLUG
+            npm run build -- --public-path=$REPOSITORY_SLUG
           fi
         env:
           REPOSITORY_OWNER: ${{ github.repository_owner }}
