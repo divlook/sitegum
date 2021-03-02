@@ -4,9 +4,9 @@ Handlebars를 사용한 정적 사이트 생성기입니다.
 
 NodeJs를 사용하여 로컬 환경에서 실행할 수 있으며 [Github Pages](https://pages.github.com), [Netlify](https://www.netlify.com) 등을 사용하여 사이트를 배포할 수 있습니다.
 
-## 참고 사이트
+## Reference
 
-### 데모
+### Demo
 
 https://divlook.github.io/sitegum
 
@@ -14,15 +14,9 @@ https://divlook.github.io/sitegum
 
 https://handlebarsjs.com
 
+이 프로그램을 사용하려면 Handlebars에 대한 지식이 필요할 수 있습니다.
+
 Handlebars 문법은 위 주소에서 확인할 수 있습니다.
-
-### Webpack
-
-https://webpack.js.org
-
-### Handlebars Webpack Plugin
-
-https://github.com/sagold/handlebars-webpack-plugin
 
 ## 필요한 프로그램
 
